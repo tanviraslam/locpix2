@@ -1,6 +1,9 @@
 var app = angular.module("app", ['ngAnimate']);
 
 app.controller("InputController", function($scope, $http){
+  //Initiasing variables
+  $scope.showResult=false;
+
   $scope.submit = function(){
     $scope.tag = $scope.data.tag;
     $scope.data.tag="";
@@ -18,9 +21,12 @@ app.controller("InputController", function($scope, $http){
       console.log(images.data);
       $scope.images = images.data;
       $scope.imageRetrieved = true;
+      $scope.submitted=false;
+      $scope.showResult=true;
     })
     .error(function(data){
-      console.log(data);
+      alert("Connection to server failed. Please search again.");
+      $scope.submitted=false;
     });
   }
 
