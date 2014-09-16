@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>LocPix</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link href="img/favicon.ico" rel="icon" type="image/x-icon"/>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body ng-controller="InputController">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">LocPix</a>
+              <form role="form" name="TagSearchForm" class="form-inline navbar-form" ng-submit="submit();submitted=true" novalidate>
+                 <div class="form-group search">
+                    <label for="search_tag" class="sr-only">Enter Tag</label>
+                    <input type="search" class="form-control" ng-model="data.tag" name="search_tag" id="search_tag" placeholder="Search By Tag" required>
+                    <input type="submit" class="btn btn-primary" ng-class="{'disabled':TagSearchForm.$invalid}" ></input>
+                 </div> 
+              </form>
+              <div class="queryText" ng-show="submitted">Searching Instagram for photos tagged with {{tag}}</div>
+            </div>
+          </div>
+        </div> <!-- Navbar -->
+        
+
+        <div class="container-fluid">
+            <div class="row pic-container" ng-show="imageRetrieved">
+                <div class="pic col-md-3" ng-repeat="image in images" >
+                  <a ng-href="{{image.link}}" target="_blank">
+                    <img ng-src="{{image.images.standard_resolution.url}}" class="pop-pic" data-toggle="tooltip" data-placement="top" title="{{image.caption.text}}">
+                    <div class="user-pic">
+                      <img ng-src="{{image.user.profile_picture}}" class="pop-pic-user" data-toggle="tooltip" data-placement="top" title="{{image.user.full_name}}">
+                    </div>
+                  </a> 
+                </div>
+            </div>
+        </div><!--Picture Container -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.js"><\/script>')</script>
+
+        <script src="js/bootstrap.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
